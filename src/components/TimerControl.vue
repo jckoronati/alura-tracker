@@ -1,13 +1,13 @@
 <template>
     <div class="is-flex is-align-items-center is-justify-content-space-between">
         <TimerDefault :seconds="seconds" />
-        <button class="button" @click="start">
+        <button class="button" @click="start" :disabled="isCounting">
             <span class="icon">
                 <i class="fas fa-play"></i>
             </span>
             <span>play</span>
         </button>
-        <button class="button" @click="end">
+        <button class="button" @click="end" :disabled="!isCounting">
             <span class="icon">
                 <i class="fas fa-stop"></i>
             </span>
@@ -28,22 +28,20 @@ export default defineComponent({
     data() {
         return {
             seconds: 0,
-            timer: 0
+            timer: 0,
+            isCounting: false,            
         }
-    },
-    computed: {
-        tempoDecorrido(): string {
-            return new Date(this.seconds * 1000).toISOString().substring(11, 8)
-        }
-    },
+    },    
     methods: {
         start() {
+            this.isCounting = true;
             this.timer = setInterval(() => {
                 this.seconds += 1
-            }, 1000)
+            }, 1000);
         },
         end() {
-            clearInterval(this.timer)
+            clearInterval(this.timer);
+            this.isCounting = false;
         }
     }
 });
