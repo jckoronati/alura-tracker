@@ -6,11 +6,7 @@
             </div>
             <div class="column">
                 <div class="is-flex is-align-items-center is-justify-content-space-between">
-                    <section>
-                        <strong>
-                            {{ tempoDecorrido }}
-                        </strong>
-                    </section>
+                    <TimerDefault :seconds="seconds" />
                     <button class="button" @click="iniciar">
                         <span class="icon">
                             <i class="fas fa-play"></i>
@@ -31,28 +27,32 @@
   
 <script lang="ts">
 import { defineComponent } from "vue";
+import TimerDefault from "./TimerDefault.vue";
 
 export default defineComponent({
     name: "TimerForm",
+    components: {
+        TimerDefault
+    },
     data() {
         return {
-            tempoEmSegundos: 0,
-            cronometro: 0
+            seconds: 0,
+            timer: 0
         }
     },
     computed: {
         tempoDecorrido(): string {
-            return new Date(this.tempoEmSegundos * 1000).toISOString().substr(11, 8)
+            return new Date(this.seconds * 1000).toISOString().substring(11, 8)
         }
     },
     methods: {
-        iniciar() {            
-            this.cronometro = setInterval(() => {
-                this.tempoEmSegundos += 1
+        iniciar() {
+            this.timer = setInterval(() => {
+                this.seconds += 1
             }, 1000)
         },
         finalizar() {
-            clearInterval(this.cronometro)
+            clearInterval(this.timer)
         }
     }
 });
