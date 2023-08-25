@@ -7,13 +7,13 @@
             <div class="column">
                 <div class="is-flex is-align-items-center is-justify-content-space-between">
                     <TimerDefault :seconds="seconds" />
-                    <button class="button" @click="iniciar">
+                    <button class="button" @click="start">
                         <span class="icon">
                             <i class="fas fa-play"></i>
                         </span>
                         <span>play</span>
                     </button>
-                    <button class="button" @click="finalizar">
+                    <button class="button" @click="end">
                         <span class="icon">
                             <i class="fas fa-stop"></i>
                         </span>
@@ -46,12 +46,12 @@ export default defineComponent({
         }
     },
     methods: {
-        iniciar() {
+        start() {
             this.timer = setInterval(() => {
                 this.seconds += 1
             }, 1000)
         },
-        finalizar() {
+        end() {
             clearInterval(this.timer)
         }
     }
