@@ -33,7 +33,7 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-    name: "FormStylish",
+    name: "TimerForm",
     data() {
         return {
             tempoEmSegundos: 0,
