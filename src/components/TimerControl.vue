@@ -25,6 +25,7 @@ export default defineComponent({
     components: {
         TimerDefault
     },
+    emits: ['onTimerIsEnding'],
     data() {
         return {
             seconds: 0,
@@ -42,6 +43,8 @@ export default defineComponent({
         end() {
             clearInterval(this.timer);
             this.isCounting = false;
+            this.$emit('onTimerIsEnding', this.seconds);
+            this.seconds = 0;
         }
     }
 });
